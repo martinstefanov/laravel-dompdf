@@ -12,8 +12,17 @@
     "require": {
         "php": ">=5.5.9",
         "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x",
-        "dompdf/dompdf": "dev-master"
+        "cyvelnet/dompdf": "dev-master"
     },
+    "package": {
+        "name": "cyvelnet/dompdf",
+        "version": "0.8.0",
+        "source": {
+                "url": "https://github.com/Cyvelnet/dompdf",
+            "type": "git",
+        "reference": "master"
+        }
+        },
     "autoload": {
         "psr-4": {
             "Barryvdh\\DomPDF\\": "src"
@@ -29,11 +38,5 @@
             }
         }
     },
-    "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Cyvelnet/dompdf"
-        }
-    ]
+    "minimum-stability": "dev"
 }
