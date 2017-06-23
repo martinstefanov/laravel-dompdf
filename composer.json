@@ -14,16 +14,6 @@
         "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x",
         "dompdf/dompdf": "^0.8"
     },
-    "package": {
-        "name": "Cyvelnet/dompdf",
-        "version": "0.8.0",
-        "source": {
-                "url": "https://github.com/Cyvelnet/dompdf",
-                "type": "git",
-                "reference": "master"
-            }
-        },
-
     "autoload": {
         "psr-4": {
             "Barryvdh\\DomPDF\\": "src"
@@ -42,5 +32,11 @@
             }
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Cyvelnet/laravel-dompdf"
+        }
+    ]
 }
