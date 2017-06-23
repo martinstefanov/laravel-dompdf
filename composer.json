@@ -18,11 +18,11 @@
         "name": "cyvelnet/dompdf",
         "version": "0.8.0",
         "source": {
-                "url": "https://github.com/Cyvelnet/dompdf",
-            "type": "git",
-        "reference": "dev-cli-fix"
-        }
-        },
+                "url": "https://github.com/Cyvelnet/dompdf.git",
+                "type": "git",
+                "reference": "dev-cli-fix"
+            }
+    },
     "autoload": {
         "psr-4": {
             "Barryvdh\\DomPDF\\": "src"
