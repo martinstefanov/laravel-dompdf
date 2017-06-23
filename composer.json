@@ -12,7 +12,7 @@
     "require": {
         "php": ">=5.5.9",
         "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x",
-        "cyvelnet/dompdf": "dev-master"
+        "cyvelnet/dompdf": "0.8.0"
     },
     "package": {
         "name": "cyvelnet/dompdf",
@@ -20,7 +20,7 @@
         "source": {
                 "url": "https://github.com/Cyvelnet/dompdf",
             "type": "git",
-        "reference": "master"
+        "reference": "dev-cli-fix"
         }
         },
     "autoload": {
