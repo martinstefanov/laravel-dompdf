@@ -39,5 +39,5 @@
             "url": "https://github.com/Cyvelnet/dompdf"
         }
     ],
-    "minimum-stability": "dev-master",
+    "minimum-stability": "dev-master"
 }
