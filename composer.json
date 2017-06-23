@@ -40,9 +40,9 @@
         "version": "0.8.0",
         "source": {
                 "url": "https://github.com/Cyvelnet/dompdf.git",
-            "type": "git",
-        "reference": "master"
-        }
+                "type": "git",
+                "reference": "cli-fix"
+            }
         }
     }],
     "minimum-stability": "dev"
