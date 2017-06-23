@@ -18,7 +18,7 @@
    "require": {
         "php": ">=5.5.9",
         "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x",
-        "dompdf/dompdf": "dev-master"
+        "dompdf/dompdf": "0.8.x-dev"
     },
     "autoload": {
         "psr-4": {
