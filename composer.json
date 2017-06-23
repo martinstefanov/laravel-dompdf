@@ -20,7 +20,7 @@
         "source": {
                 "url": "https://github.com/Cyvelnet/dompdf.git",
                 "type": "git",
-                "reference": "dev-cli-fix"
+                "reference": "dev-master"
             }
     },
     "autoload": {
@@ -37,6 +37,5 @@
                 "PDF": "Barryvdh\\DomPDF\\Facade"
             }
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
