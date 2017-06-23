@@ -38,5 +38,6 @@
             "type": "vcs",
             "url": "https://github.com/Cyvelnet/dompdf"
         }
-    ]
+    ],
+    "minimum-stability": "dev-master",
 }
