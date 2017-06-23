@@ -12,22 +12,13 @@
     "require": {
         "php": ">=5.5.9",
         "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x",
-        "Cyvelnet/dompdf": "0.8.0"
+        "dompdf/dompdf": "dev-cli-fix as ^0.8"
     },
     "autoload": {
         "psr-4": {
             "Barryvdh\\DomPDF\\": "src"
         }
     },
-    "package": {
-        "name": "Cyvelnet/dompdf",
-        "version": "0.8.0",
-        "source": {
-                "url": "https://github.com/Cyvelnet/dompdf",
-            "type": "git",
-        "reference": "master"
-        }
-        },
     "extra": {
         "branch-alias": {
             "dev-master": "0.8-dev"
