@@ -35,8 +35,8 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/Cyvelnet/dompdf"
+            "type": "git",
+            "url": "https://github.com/Cyvelnet/dompdf.git"
         }
     ],
     "minimum-stability": "dev"
