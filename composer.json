@@ -36,7 +36,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/Cyvelnet/laravel-dompdf"
+            "url": "https://github.com/Cyvelnet/dompdf"
         }
     ]
 }
