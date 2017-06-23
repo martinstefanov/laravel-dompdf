@@ -9,10 +9,19 @@
             "email": "barryvdh@gmail.com"
         }
     ],
-    "require": {
+   "require": {
         "php": ">=5.5.9",
         "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x",
-        "dompdf/dompdf": "dev-master"
+        "cyvelnet/dompdf": "0.8.0"
+    },
+    "package": {
+        "name": "cyvelnet/dompdf",
+        "version": "0.8.0",
+        "source": {
+                "url": "https://github.com/Cyvelnet/dompdf.git",
+                "type": "git",
+                "reference": "dev-master"
+            }
     },
     "autoload": {
         "psr-4": {
