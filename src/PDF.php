@@ -1,29 +1,32 @@
 <?php
 namespace Barryvdh\DomPDF;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Exception;
-use Illuminate\Config\Repository as ConfigRepository;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\View\Environment as ViewEnviroment;
+use Illuminate\Config\Repository as ConfigRepository;
 use Illuminate\Http\Response;
 
 /**
- * A Laravel wrapper for DOMPDF
+ * A Laravel wrapper for Dompdf
  *
  * @package laravel-dompdf
  * @author Barry vd. Heuvel
  */
 class PDF{
 
-    /** @var \DOMPDF  */
+    /** @var Dompdf  */
     protected $dompdf;
 
-    /** @var \Illuminate\Config\Repository  */
+    /** @var \Illuminate\Contracts\Config\Repository  */
     protected $config;
 
     /** @var \Illuminate\Filesystem\Filesystem  */
     protected $files;
 
-    /** @var \Illuminate\View\Factory  */
+    /** @var \Illuminate\Contracts\View\Factory  */
     protected $view;
 
     protected $rendered = false;
@@ -33,37 +36,24 @@ class PDF{
     protected $public_path;
 
     /**
-     *
-     * @param \Illuminate\Config\Repository $config
+     * @param Dompdf $dompdf
+     * @param \Illuminate\Contracts\Config\Repository $config
      * @param \Illuminate\Filesystem\Filesystem $files
-     * @param \Illuminate\View\Factory $view
-     * @param string $publicPath
+     * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct(ConfigRepository $config, Filesystem $files, /* Illuminate\View\Factory */ $view, $publicPath){
+    public function __construct(Dompdf $dompdf, ConfigRepository $config, Filesystem $files, ViewEnviroment $view){
+        $this->dompdf = $dompdf;
         $this->config = $config;
         $this->files = $files;
         $this->view = $view;
-        $this->public_path = $publicPath;
 
-        $this->showWarnings = $this->config->get('laravel-dompdf::show_warnings', false);
-
-        //To prevent old configs from not working..
-        if($this->config->has('laravel-dompdf::paper')){
-            $this->paper = $this->config->get('laravel-dompdf::paper');
-        }else{
-            $this->paper = DOMPDF_DEFAULT_PAPER_SIZE;
-        }
-
-        $this->orientation = $this->config->get('laravel-dompdf::orientation') ?: 'portrait';
-
-        $this->dompdf = new \DOMPDF();
-        $this->dompdf->set_base_path(realpath($publicPath));
+        $this->showWarnings = $this->config->get('dompdf.show_warnings', false);
     }
 
     /**
      * Get the DomPDF instance
      *
-     * @return \DOMPDF
+     * @return Dompdf
      */
     public function getDomPDF(){
         return $this->dompdf;
@@ -76,22 +66,10 @@ class PDF{
      * @param string $orientation
      * @return $this
      */
-    public function setPaper($paper, $orientation=null){
+    public function setPaper($paper, $orientation = 'portrait'){
         $this->paper = $paper;
-        if($orientation){
-            $this->orientation = $orientation;
-        }
-        return $this;
-    }
-
-    /**
-     * Set the orientation (default portrait)
-     *
-     * @param string $orientation
-     * @return static
-     */
-    public function setOrientation($orientation){
         $this->orientation = $orientation;
+        $this->dompdf->setPaper($paper, $orientation);
         return $this;
     }
 
@@ -115,7 +93,7 @@ class PDF{
      */
     public function loadHTML($string, $encoding = null){
         $string = $this->convertEntities($string);
-        $this->dompdf->load_html($string, $encoding);
+        $this->dompdf->loadHtml($string, $encoding);
         $this->rendered = false;
         return $this;
     }
@@ -127,7 +105,7 @@ class PDF{
      * @return static
      */
     public function loadFile($file){
-        $this->dompdf->load_html_file($file);
+        $this->dompdf->loadHtmlFile($file);
         $this->rendered = false;
         return $this;
     }
@@ -144,6 +122,18 @@ class PDF{
     public function loadView($view, $data = array(), $mergeData = array(), $encoding = null){
         $html = $this->view->make($view, $data, $mergeData)->render();
         return $this->loadHTML($html, $encoding);
+    }
+
+    /**
+     * Set/Change an option in DomPdf
+     *
+     * @param array $options
+     * @return static
+     */
+    public function setOptions(array $options) {
+        $options = new Options($options);
+        $this->dompdf->setOptions($options);
+        return $this;
     }
 
     /**
@@ -200,12 +190,12 @@ class PDF{
     /**
      * Render the PDF
      */
-    protected function render(){
+    public function render(){
         if(!$this->dompdf){
             throw new Exception('DOMPDF not created yet');
         }
 
-        $this->dompdf->set_paper($this->paper, $this->orientation);
+        $this->dompdf->setPaper($this->paper, $this->orientation);
 
         $this->dompdf->render();
 
@@ -229,6 +219,7 @@ class PDF{
     protected function convertEntities($subject){
         $entities = array(
             '€' => '&#0128;',
+            '£' => '&pound;',
         );
 
         foreach($entities as $search => $replace){
